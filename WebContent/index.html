@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Insert title here</title>
+
+	<script src="js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+
+</head>
+<body>
+	
+	<form action="login/login.do" method="post">
+		<label for="username">用户名</label>
+		<input type="text" name="username">
+		<label for="password">密码</label>
+		<input type="password" name="password">
+		<input type="submit">
+	</form>
+	
+	<button id="set">set</button>
+	<button id="get">get</button>
+	<button id="tel">tel</button>
+	<p id="setp">p set</p>
+	<p id="getp">p get</p>
+	<p id="telp">p tel</p>
+	
+<!--	<form action="update/visitor/update.do" method="post">
+		<input type="submit" value="form submit"/>
+	</form>-->
+	
+	
+	
+	
+</body>
+	<script type="text/javascript">
+
+		$("#tel").click(function(){
+			$.ajax({
+				type:"post",
+				url:"select/director/selectReturnVisitorRecord.do",
+//				url:"update/consultant/updateStarByToggle.do",
+				contentType:"application/json;charset=utf-8",
+				data:JSON.stringify({visitorId:1, pageNum:1}),  // 转json字符串发送
+				dataType:"json",
+				success:function(data){
+					console.log("success");
+					$("#telp").text(data.page);
+//					$("#dis").text(data.page.dataList[0].vid+" "+data.page.dataList[1].vid+" "+data.page.dataList[2].vid+"  "+data.page.dataList[3].vid+" "+data.page.currentPage);
+				},
+				error:function(data){
+					$("#telp").text("eeeee");
+				}
+			});
+		});
+
+
+		$("#set").click(function(){
+
+			$.ajax({
+				type:"post",
+				url: "hy/hello.do",
+				// url:"select/visitor/selectVisitorByTelBySet.do",
+//				url:"update/consultant/updateStarByToggle.do",
+				contentType:"application/json;charset=utf-8"
+				data:JSON.stringify({tel:"18"}),  // 转json字符串发送
+				dataType:"json",
+				success:function(data){
+					console.log("success");
+					// $("#setp").text(data.page);
+//					$("#setp").text(data.page.dataList[0].rdetail+"  "+data.page.dataList[1].rdetail+"  "+data.page.dataList.length);
+//					$("#dis").text(data.page.dataList[0].vid+" "+data.page.dataList[1].vid+" "+data.page.dataList[2].vid+"  "+data.page.dataList[3].vid+" "+data.page.currentPage);
+				},
+				error:function(data){
+					$("#dis").text("eeeee");
+				}
+			});
+		});
+
+		$("#get").click(function(){
+			$.ajax({
+				type:"post",
+				url:"select/visitor/selectVisitorByTelByGet.do",
+//				url:"update/consultant/updateStarByToggle.do",
+				contentType:"application/json;charset=utf-8",
+//				data:JSON.stringify({}),  // 转json字符串发送
+				dataType:"json",
+				success:function(data){
+					console.log("success");
+					$("#getp").text(data.page.vid);
+//					$("#dis").text(data.page.dataList[0].vid+" "+data.page.dataList[1].vid+" "+data.page.dataList[2].vid+"  "+data.page.dataList[3].vid+" "+data.page.currentPage);
+				},
+				error:function(data){
+					$("#dis").text("eeeee");
+				}
+			});
+		});
+
+
+
+	</script>
+
+</html>
